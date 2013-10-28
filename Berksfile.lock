@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "secure-server": {
+      "path": "."
+    },
+    "openssh": {
+      "locked_version": "1.3.0"
+    },
+    "iptables": {
+      "locked_version": "0.12.0"
+    }
+  }
+}
