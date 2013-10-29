@@ -1,69 +1,50 @@
 secure-server cookbook
 ==========
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
-
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - . needs toaster to brown your bagel.
-
-Attributes
-----------
-TODO: List you cookbook attributes here.
-
-e.g.
-#### .::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['.']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+This cookbooks makes Linux server more secure.
 
 Usage
 -----
-#### .::default
-TODO: Write usage instructions for each cookbook.
+Include ```recipe[secure-server::default]``` into your runlist to run all recipes. This includes:
 
-e.g.
-Just include `.` in your node's `run_list`:
+* ```ssh```
+* ```firewall```
+* ```fail2ban```
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[.]"
-  ]
-}
+It's also possible to include any particular recipe separately.
+
+ssh recipe
+----------
+It uses [openssh cookbook](github.com/opscode-cookbooks/openssh) and basically does 2 things:
+
+1. Disables root login
+2. Disables password authentication
+
+Prior to including this recipe, make sure that you have ```sudo``` rights as non-root user because you won't
+be able to login as ```root``` via ```SSH``` after converging. Also be sure that you've added your public key
+to the list of authorized keys, otherwise you won't be able to login.
+
+Attributes:
+* ```node['secure-server']['ssh']['password_authentication']``` - boolean (```true``` or ```false```, default: ```true```)
+* ```node['secure-server']['ssh']['permit_root_login']``` - boolean (```true``` or ```false```, default: ```true```)
+
+firewall recipe
+---------------
+```ufw``` is installed and configured with the help of [firewall cookbook](https://github.com/opscode-cookbooks/firewall).
+This recipes configures ```ufw``` to whitelist given ports.
+
+Attributes:
+* ```node['secure-server']['firewall']['rules']``` - array of hashes, set of ```ufw``` rules
+
+It enables SSH, HTTP and HTTPS by default.
+```ruby
+default['secure-server']['firewall']['rules'] = [
+  { port: 22,  action: :allow },
+  { port: 80,  action: :allow },
+  { port: 443, action: :allow }
+]
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write you change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+fail2ban
+--------
+Installs and configures [fail2ban](http://www.fail2ban.org) using [fail2ban cookbook](https://github.com/opscode-cookbooks/fail2ban).
+By default it monitors ```/var/log/auth.log``` for failed ```SSH``` login attempts. See [cookbook page](https://github.com/opscode-cookbooks/fail2ban) for configuration options.
