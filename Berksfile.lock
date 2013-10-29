@@ -1,13 +1,22 @@
 {
-  "dependencies": {
+  "sources": {
     "secure-server": {
       "path": "."
     },
     "openssh": {
       "locked_version": "1.3.0"
     },
+    "firewall": {
+      "locked_version": "0.11.2"
+    },
+    "minitest-handler": {
+      "locked_version": "1.1.0"
+    },
     "iptables": {
       "locked_version": "0.12.0"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.4"
     }
   }
 }

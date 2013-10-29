@@ -4,29 +4,36 @@ driver_config:
   require_chef_omnibus: true
 
 platforms:
-- name: ubuntu-12.04
-  driver_config:
-    box: opscode-ubuntu-12.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
-# - name: ubuntu-10.04
-#   driver_config:
-#     box: opscode-ubuntu-10.04
-#     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box
-# - name: centos-6.4
-#   driver_config:
-#     box: opscode-centos-6.4
-#     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
-# - name: centos-5.9
-#   driver_config:
-#     box: opscode-centos-5.9
-#     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-5.9_provisionerless.box
+  - name: ubuntu-12.04
+    driver_config:
+      box: opscode-ubuntu-12.04
+      box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+  # - name: ubuntu-10.04
+  #   driver_config:
+  #     box: opscode-ubuntu-10.04
+  #     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box
+  # - name: centos-6.4
+  #   driver_config:
+  #     box: opscode-centos-6.4
+  #     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
+  # - name: centos-5.9
+  #   driver_config:
+  #     box: opscode-centos-5.9
+  #     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-5.9_provisionerless.box
 
 suites:
-- name: default
-  run_list: 
-    - recipe[secure-server::ssh]
-  attributes:
-    'secure-server':
-      ssh:
-        password_authentication: false
-        permit_root_login: false
+  - name: default
+    run_list: 
+      - recipe[secure-server]
+      - recipe[minitest-handler]
+    attributes:
+      'secure-server':
+        ssh:
+          password_authentication: false
+          permit_root_login: false
+        firewall:
+          rules:
+            - port: 22
+              action: allow
+            - port: 80
+              action: allow
