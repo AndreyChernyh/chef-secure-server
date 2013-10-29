@@ -1,5 +1,4 @@
 # secure-server cookbook
-
 This cookbooks makes Linux server more secure.
 
 ## Usage
@@ -34,8 +33,10 @@ default['secure-server']['firewall']['rules'] = [
 ```
 
 ## fail2ban recipe
-
 Installs and configures [fail2ban](http://www.fail2ban.org) using [fail2ban cookbook](https://github.com/opscode-cookbooks/fail2ban). By default it monitors ```/var/log/auth.log``` for failed ```SSH``` login attempts. 
 
 ### Attributes
 See [cookbook page](https://github.com/opscode-cookbooks/fail2ban) for configuration options.
+
+## Testing
+[test-kitchen](https://github.com/opscode/test-kitchen) is used for integration testing. Run integration suite with ```kitchen test``` command. Run ```rake``` for basic syntax check and linting.
