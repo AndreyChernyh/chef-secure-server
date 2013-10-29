@@ -8,6 +8,7 @@ version          '0.0.1'
 
 recipe 'ssh',      'Installs and configures OpenSSH'
 recipe 'firewall', 'Enables ufw and sets up white listed ports'
+recipe 'fail2ban', 'Installs and configures fail2ban to watch for SSH connections'
 
-%w(ubuntu).each{|os| supports os}
-%w(openssh firewall).each{|cookbook| depends cookbook}
+%w(ubuntu centos).each{|os| supports os}
+%w(openssh firewall fail2ban).each{|cookbook| depends cookbook}

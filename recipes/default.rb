@@ -1,2 +1,1 @@
-include_recipe "#{cookbook_name}::ssh"
-include_recipe "#{cookbook_name}::firewall"
+%w(ssh firewall fail2ban).each {|recipe| include_recipe "#{cookbook_name}::#{recipe}"}
