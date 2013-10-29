@@ -1,38 +1,27 @@
-secure-server cookbook
-==========
+# secure-server cookbook
+
 This cookbooks makes Linux server more secure.
 
-Usage
------
-Include ```recipe[secure-server::default]``` into your runlist to run all recipes. This includes:
+## Usage
+Include ```recipe[secure-server]``` into your runlist to run all recipes. It's also possible to include any particular recipe separately.
 
-* ```ssh```
-* ```firewall```
-* ```fail2ban```
-
-It's also possible to include any particular recipe separately.
-
-ssh recipe
-----------
-It uses [openssh cookbook](github.com/opscode-cookbooks/openssh) and basically does 2 things:
+## ssh recipe
+Uses [openssh cookbook](github.com/opscode-cookbooks/openssh) and basically does 2 things:
 
 1. Disables root login
 2. Disables password authentication
 
-Prior to including this recipe, make sure that you have ```sudo``` rights as non-root user because you won't
-be able to login as ```root``` via ```SSH``` after converging. Also be sure that you've added your public key
-to the list of authorized keys, otherwise you won't be able to login.
+Prior to including this recipe, make sure that you can ```sudo``` as non-root user because you won't be able to login as ```root``` via ```SSH``` after converging. Also be sure that you've added your public key to the list of authorized keys, otherwise you won't be able to login.
 
-Attributes:
+### Attributes:
 * ```node['secure-server']['ssh']['password_authentication']``` - boolean (```true``` or ```false```, default: ```true```)
 * ```node['secure-server']['ssh']['permit_root_login']``` - boolean (```true``` or ```false```, default: ```true```)
 
-firewall recipe
----------------
+## firewall recipe
 ```ufw``` is installed and configured with the help of [firewall cookbook](https://github.com/opscode-cookbooks/firewall).
 This recipes configures ```ufw``` to whitelist given ports.
 
-Attributes:
+### Attributes
 * ```node['secure-server']['firewall']['rules']``` - array of hashes, set of ```ufw``` rules
 
 It enables SSH, HTTP and HTTPS by default.
@@ -44,7 +33,9 @@ default['secure-server']['firewall']['rules'] = [
 ]
 ```
 
-fail2ban
---------
-Installs and configures [fail2ban](http://www.fail2ban.org) using [fail2ban cookbook](https://github.com/opscode-cookbooks/fail2ban).
-By default it monitors ```/var/log/auth.log``` for failed ```SSH``` login attempts. See [cookbook page](https://github.com/opscode-cookbooks/fail2ban) for configuration options.
+## fail2ban recipe
+
+Installs and configures [fail2ban](http://www.fail2ban.org) using [fail2ban cookbook](https://github.com/opscode-cookbooks/fail2ban). By default it monitors ```/var/log/auth.log``` for failed ```SSH``` login attempts. 
+
+### Attributes
+See [cookbook page](https://github.com/opscode-cookbooks/fail2ban) for configuration options.
