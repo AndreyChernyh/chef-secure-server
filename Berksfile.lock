@@ -4,7 +4,9 @@
       "path": "."
     },
     "openssh": {
-      "locked_version": "1.3.0"
+      "locked_version": "1.3.1",
+      "git": "git@github.com:AndreyChernyh/openssh.git",
+      "ref": "ee011fdda086547c876bceff79f63d751d0893b9"
     },
     "firewall": {
       "locked_version": "0.11.2"
