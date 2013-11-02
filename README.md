@@ -1,4 +1,6 @@
 # secure-server cookbook
+[![Build Status](https://travis-ci.org/AndreyChernyh/chef-secure-server.png)](https://travis-ci.org/AndreyChernyh/chef-secure-server)
+
 This cookbooks makes Linux server more secure. It's inspired by popular Bryan Kennedy post [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers).
 
 ## Usage
@@ -45,4 +47,3 @@ See [cookbook page](https://github.com/opscode-cookbooks/fail2ban) for configura
 Andrey Chernih [andrey.chernih@gmail.com](mailto:andrey.chernih@gmail.com)
 
 [Apache 2.0](https://github.com/AndreyChernyh/chef-secure-server/blob/master/LICENSE)
-
