@@ -3,6 +3,18 @@
 
 This cookbooks makes Linux server more secure. It's inspired by popular Bryan Kennedy post [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers).
 
+## Platforms
+Cookbook has been tested on:
+
+* Ubuntu 13.04
+* Ubuntu 13.10
+
+```test-kitchen``` integration tests are passing on:
+
+* Ubuntu 12.04
+* Ubuntu 13.04
+* CentOS 6.4 (except firewall recipe)
+
 ## Usage
 Include ```recipe[secure-server]``` into your runlist to run all recipes. It's also possible to include any particular recipe separately.
 
