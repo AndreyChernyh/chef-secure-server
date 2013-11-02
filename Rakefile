@@ -11,13 +11,16 @@ Bundler.setup
 
 require 'berkshelf'
 
-FileUtils.rm_rf('vendor/cookbooks')
-berksfile = Berkshelf::Berksfile.from_file('Berksfile')
-berksfile.install(path: 'vendor/cookbooks')
+# FileUtils.rm_rf('vendor/cookbooks')
+# berksfile = Berkshelf::Berksfile.from_file('Berksfile')
+# berksfile.install(path: 'vendor/cookbooks')
 
-task default: %i(foodcritic knife)
+require 'rubocop/rake_task'
+Rubocop::RakeTask.new
+
+task default: %i(foodcritic knife rubocop)
 
 desc 'Validates cookbook with "knife cookbook" command'
 task :knife do
-  sh "bundle exec knife cookbook test secure-server -o vendor/cookbooks"
+  sh "bundle exec knife cookbook test secure-server -o ../"
 end
