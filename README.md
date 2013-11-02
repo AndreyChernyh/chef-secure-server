@@ -13,7 +13,7 @@ Cookbook has been tested on:
 
 * Ubuntu 12.04
 * Ubuntu 13.04
-* CentOS 6.4 (except firewall recipe)
+* CentOS 6.4
 
 ## Usage
 Include ```recipe[secure-server]``` into your runlist to run all recipes. It's also possible to include any particular recipe separately.
@@ -32,7 +32,7 @@ Prior to including this recipe, make sure that you can ```sudo``` as non-root us
 
 ## firewall recipe
 ```ufw``` is installed and configured with the help of [firewall cookbook](https://github.com/opscode-cookbooks/firewall).
-This recipes configures ```ufw``` to whitelist given ports.
+This recipes configures ```ufw``` to whitelist given ports. This recipe is only supported on Debian and Ubuntu platforms.
 
 ### Attributes
 * ```node['secure-server']['firewall']['rules']``` - array of hashes, set of ```ufw``` rules
