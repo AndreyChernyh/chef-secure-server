@@ -40,3 +40,9 @@ See [cookbook page](https://github.com/opscode-cookbooks/fail2ban) for configura
 
 ## Testing
 [test-kitchen](https://github.com/opscode/test-kitchen) is used for integration testing. Run integration suite with ```kitchen test``` command. Run ```rake``` for basic syntax check and linting.
+
+# License & Author
+Andrey Chernih [andrey.chernih@gmail.com](mailto:andrey.chernih@gmail.com)
+
+[Apache 2.0](https://github.com/AndreyChernyh/chef-secure-server/blob/master/LICENSE)
+
