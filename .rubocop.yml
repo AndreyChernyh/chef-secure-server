@@ -5,3 +5,6 @@ AllCops:
 
 LineLength:
   Enabled: false
+
+Encoding:
+  Enabled: false
