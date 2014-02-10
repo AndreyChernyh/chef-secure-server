@@ -3,7 +3,7 @@ include_recipe 'firewall::default'
 node['secure-server']['firewall']['rules'].each_with_index do |rule, i|
   firewall_rule "rule #{i}" do
     port     rule[:port]
-    protocol rule[:protocol] || :tcp
+    protocol (rule[:protocol] || :tcp).to_sym
     action   rule[:action].to_sym
   end
 end
